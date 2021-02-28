@@ -2,22 +2,26 @@ import java.time.LocalTime;
 
 public class Clock {
 
+    private static final int HOURS_PER_DAY = 24;
+    private static final int MINUTES_PER_HOUR = 60;
+    private static final int MINUTES_PER_DAY = MINUTES_PER_HOUR * HOURS_PER_DAY;
+
     private int hour;
     private int minute;
 
     public Clock(int hour, int minute) {
         int totalMinutes = expressAsMinutesOfADay(hour, minute, 0);
-        this.hour = (totalMinutes / 60) % 24;
-        this.minute = totalMinutes % 60;
+        this.hour = (totalMinutes / MINUTES_PER_HOUR) % HOURS_PER_DAY;
+        this.minute = totalMinutes % MINUTES_PER_HOUR;
     }
 
     private int expressAsMinutesOfADay(int hour, int minute, int minutesToAdd) {
-        int totalMinutes = hour * 60 + minute + minutesToAdd;
+        int totalMinutes = hour * MINUTES_PER_HOUR + minute + minutesToAdd;
 
-        int minutesOfADay = totalMinutes % (24 * 60);
+        int minutesOfADay = totalMinutes % MINUTES_PER_DAY;
 
         if (minutesOfADay < 0) {
-            minutesOfADay = 24 * 60 + minutesOfADay;
+            minutesOfADay = MINUTES_PER_DAY + minutesOfADay;
         }
         return minutesOfADay;
     }
@@ -26,8 +30,8 @@ public class Clock {
 
         int totalMinutes = expressAsMinutesOfADay(this.hour, this.minute, minutes);
 
-        this.hour = (totalMinutes / 60) % 24;
-        this.minute = totalMinutes % 60;
+        this.hour = (totalMinutes / MINUTES_PER_HOUR) % HOURS_PER_DAY;
+        this.minute = totalMinutes % MINUTES_PER_HOUR;
 
     }
 
