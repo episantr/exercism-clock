@@ -1,5 +1,3 @@
-import java.time.LocalTime;
-
 public class Clock {
 
     private static final int HOURS_PER_DAY = 24;
@@ -55,7 +53,6 @@ public class Clock {
 
     @Override
     public String toString() {
-        LocalTime time = LocalTime.of(this.hour, this.minute);
-        return time.toString();
+        return String.format("%02d:%02d", this.hour, this.minute);
     }
 }
